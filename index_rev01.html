@@ -1,0 +1,99 @@
+<html>
+
+  <head>
+    <title>List To Do Application</title>
+    <style>
+      .title {
+        font-family: 'Courier New', Courier, monospace;
+        text-align: center;
+      }
+
+      .item-list {
+        list-style: none;
+        margin-top: 10px;
+      }
+
+      .note-item {
+        background-color: aliceblue;
+        font-family: 'Courier New', Courier, monospace;
+        padding: 15px;
+        margin: 10px;
+        border-radius: 15px;
+
+      }
+
+      .note-layout {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .form-entry {
+        text-align: center;
+        margin-top: 80px;
+      }
+
+      .text-field {
+        font-size: 36px;
+        font-family: 'Courier New', Courier, monospace;
+        border: 1px solid blue;
+        border-radius.: 5px;
+      }
+
+      .lbl {
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: 800;
+        font-size: 24px;
+        margin-right: 10px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1 class="title">List To Do Application</h1>
+
+
+      <ol class="item-list">
+        <li class="note-item" v-for="todo in todos" v-on:dblclick="onDelete(todo)">{{todo}}</li>
+
+      </ol>
+
+      {{typedTodo}}
+
+      <div class="form-entry">
+        <label class="lbl">Note</label>
+        <input v-on:keyup.enter="onEnter" v-model.trim="typedTodo" type="text" class="text-field" id="note-entry" placeholder="end by enter key" />
+      </div>
+    </div>
+
+
+    <script type="module">
+      import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+
+            createApp({
+                data() {
+                   return {
+                      typedTodo:"",
+                      message: "HelloWorld",
+                      todos:["mandi","baca buku"]
+                      
+                   }
+                },
+                methods: {
+                    onEnter(){
+                      this.todos.push(this.typedTodo);
+                      this.typedTodo = "";
+                    },
+                    
+                    onDelete(deletedTodo){
+                    	this.todos = this.todos.filter((t)=> t!= deletedTodo)
+                    }
+                }
+           }).mount('#app')
+
+        </script>
+
+  </body>
+
+</html>
